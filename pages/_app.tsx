@@ -1,6 +1,15 @@
 import "@/styles/globals.css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import type { AppProps } from "next/app";
+import { Toaster } from "react-hot-toast";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <div className="inter.className">
+      <GoogleOAuthProvider clientId="236579224007-a6l8biu1l8fk41782voj5ab1g1gm3a90.apps.googleusercontent.com">
+        <Component {...pageProps} />
+        <Toaster />
+      </GoogleOAuthProvider>
+    </div>
+  );
 }

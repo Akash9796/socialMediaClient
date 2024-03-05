@@ -7,6 +7,15 @@ import { SiGooglemessages } from "react-icons/si";
 import { IoBookmarkSharp } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import FeedCard from "@/components/FeedCard";
+import {
+  CredentialResponse,
+  GoogleLogin,
+  GoogleOAuthProvider,
+} from "@react-oauth/google";
+import { useCallback } from "react";
+import toast from "react-hot-toast";
+import { graphqlClient } from "@/clients/api";
+import { verifyUserGoogleToken } from "@/graphql/query/user";
 
 interface TwitterSidebarButton {
   title: string;
@@ -41,6 +50,28 @@ const SidebarMenuItems: TwitterSidebarButton[] = [
 ];
 
 export default function Home() {
+  
+  const handleLoginWithGoogle = useCallback(
+    async (cred: CredentialResponse) => {
+      const googleToken = cred.credential;
+      if (!googleToken) return toast.error(`Google token not found`);
+
+      const { varifyGoogleToken } = await graphqlClient.request(
+        verifyUserGoogleToken,
+        { token: googleToken }
+      );
+
+      toast.success("Verified Success");
+      console.log(varifyGoogleToken);
+
+      if (varifyGoogleToken)
+        window.localStorage.setItem("__twitter_token", varifyGoogleToken);
+
+      // await queryClient.invalidateQueries(["curent-user"]);
+    },
+    []
+  );
+
   return (
     <div>
       <div className="grid grid-cols-12  px-[100px] ">
@@ -68,13 +99,18 @@ export default function Home() {
           </div>
         </div>
         <div className="col-span-6 border-r-2 border-l-2 h-screen overflow-hidden border-gray-400">
-  <div className="h-full overflow-y-auto scrollbar-width-none">
-    <FeedCard />
-    <FeedCard />
-    <FeedCard />
-  </div>
-</div>
-        <div className="col-span-3"></div>
+          <div className="h-full overflow-y-auto scrollbar-width-none">
+            <FeedCard />
+            <FeedCard />
+            <FeedCard />
+          </div>
+        </div>
+        <div className="col-span-3">
+          <div className="p-5 bg-slate-700 rounded-lg">
+            <h1 className="my-2 text-2xl">New to GetSocial?</h1>
+            <GoogleLogin onSuccess={handleLoginWithGoogle} />
+          </div>
+        </div>
       </div>
     </div>
   );
