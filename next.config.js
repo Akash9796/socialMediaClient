@@ -1,7 +1,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["lumiere-a.akamaihd.net", "c4.wallpaperflare.com"], // Add the hostname here
+    domains: ["lumiere-a.akamaihd.net", "c4.wallpaperflare.com","lh3.googleusercontent.com"], // Add the hostname here
   },
 };
 
