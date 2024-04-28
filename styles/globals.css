@@ -25,6 +25,8 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
 * {
   /* Style the scrollbar track */
   .col-span-6::-webkit-scrollbar {
@@ -37,8 +39,20 @@ body {
   }
 }
 
+
+
 *:focus {
   outline: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 @layer utilities {
@@ -46,3 +60,5 @@ body {
     text-wrap: balance;
   }
 }
+
+

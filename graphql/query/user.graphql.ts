@@ -1,3 +1,4 @@
+import { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { graphql } from "../../gql";
 
 export const verifyUserGoogleToken = graphql(`
@@ -12,10 +13,67 @@ export const getCurrentUserQuery = graphql(`
   query GetCurrentUser {
     getCurrentUser {
       id
+      firstName
+      lastName
+      profileImageUrl
+      followers {
+        id
+        firstName
+        lastName
+        profileImageUrl
+      }
+      following {
+        id
+        firstName
+        lastName
+        profileImageUrl
+      }
+      posts {
+        id
+        content
+        imageUrl
+        author {
+          id
+          firstName
+          email
+          profileImageUrl
+        }
+      }
+    }
+  }
+`);
+
+export const getUserById = graphql(`
+  #graphql
+  query GetUserById($id: ID!) {
+    getUserById(id: $id) {
+      id
       profileImageUrl
       firstName
       lastName
-      email
+      followers {
+        id
+        firstName
+        lastName
+        profileImageUrl
+      }
+      following {
+        id
+        firstName
+        lastName
+        profileImageUrl
+      }
+      posts {
+        id
+        content
+        imageUrl
+        author {
+          id
+          firstName
+          email
+          profileImageUrl
+        }
+      }
     }
   }
 `);

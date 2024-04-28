@@ -1,0 +1,19 @@
+declare module 'cloudinary-react' {
+  export const Image: React.FC<any>;
+  export const Video: React.FC<any>;
+  export const Transformation: React.FC<any>;
+  export const CloudinaryContext: React.FC<any>;
+  export const TransformationContext: React.FC<any>;
+  export const Picture: React.FC<any>;
+  export const VideoTag: React.FC<any>;
+  export const VideoContext: React.FC<any>;
+  export const VideoTransformation: React.FC<any>;
+  export const Placeholder: React.FC<any>;
+  export const TransformationPlaceholder: React.FC<any>;
+  export const PlaceholderImage: React.FC<any>;
+  export const PlaceholderVideo: React.FC<any>;
+  export const AdvancedImage: React.FC<any>;
+  export const AdvancedPicture: React.FC<any>;
+  export const AdvancedVideo: React.FC<any>;
+  export const Sprite: React.FC<any>;
+}

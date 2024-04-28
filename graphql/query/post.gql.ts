@@ -1,4 +1,3 @@
-import { TypedQueryDocumentNode } from "graphql";
 import { graphql } from "../../gql";
 
 export const getAllPosts = graphql(`
@@ -9,6 +8,7 @@ export const getAllPosts = graphql(`
       id
       imageUrl
       author {
+        id
         firstName
         email
         profileImageUrl

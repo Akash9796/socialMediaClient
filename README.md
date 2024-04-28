@@ -1,3 +1,5 @@
+#STEPS TO CREATE CLIENT
+
 1. yarn install next-app .
 2. yarn run dev
 3. clear index.tsx -->divide home screen in grids
@@ -20,4 +22,25 @@
 
 1. Create Post box for writing posts & uploading images
 2. Write Query & Mutations for it to connect with Backend & Don't forget to run 'yarn codegen' to generate types for latest Queries
-4. Write a custom hook(useGetAllPosts , useCreatePostMuatation) post.hook.ts for catching/saving all the posts using useQuery & useMutation functions.
+3. Write a custom hook(useGetAllPosts , useCreatePostMuatation) post.hook.ts for catching/saving all the posts using useQuery & useMutation functions.
+
+---
+
+1. Create dynamic page [id].tsx for showing user specific details.
+2. Then route on profile page based on user.id,
+
+---
+
+1. Create getUserbyId query but dont call it with hook this time , but implement a SSR for it.
+2. export const getServerSideProps: GetServerSideProps<ServerProps> = async (
+   context
+   ) => {
+   const id = context.query.id as string;
+   if (!id) return { notFound: true, props: { userInfo: undefined } };
+
+const userInfo = graphqlClient.request(getUserById, { id });
+if (!(await userInfo).getUserById) return { notFound: true };
+return { props: { userInfo: (await userInfo).getUserById as User } };
+}
+
+3. recieve these props in same component written above this funct,
